@@ -1,13 +1,13 @@
 package event_bus
 
 import (
+	"io/ioutil"
+	"log"
+
 	"github.com/QubitProducts/bamboo/Godeps/_workspace/src/github.com/samuel/go-zookeeper/zk"
 	"github.com/QubitProducts/bamboo/configuration"
 	"github.com/QubitProducts/bamboo/services/haproxy"
 	"github.com/QubitProducts/bamboo/services/template"
-	"io/ioutil"
-	"log"
-	"os/exec"
 )
 
 type MarathonEvent struct {
@@ -105,14 +105,4 @@ func handleHAPUpdate(conf *configuration.Configuration, conn *zk.Conn) bool {
 		log.Println("HAProxy: Same content, no need to reload")
 		return false
 	}
-}
-
-func execCommand(cmd string) error {
-	log.Printf("Exec cmd: %s \n", cmd)
-	output, err := exec.Command("sh", "-c", cmd).CombinedOutput()
-	if err != nil {
-		log.Println(err.Error())
-		log.Println("Output:\n" + string(output[:]))
-	}
-	return err
 }

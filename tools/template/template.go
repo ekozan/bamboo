@@ -3,6 +3,7 @@ package template
 import (
 	"bytes"
 	"text/template"
+
 	"github.com/QubitProducts/bamboo/services/service"
 )
 
@@ -20,7 +21,7 @@ func getService(data map[string]service.Service, appId string) service.Service {
 	Returns string content of a rendered template
 */
 func RenderTemplate(templateName string, templateContent string, data interface{}) (string, error) {
-	funcMap := template.FuncMap{ "hasKey": hasKey,  "getService": getService }
+	funcMap := template.FuncMap{"hasKey": hasKey, "getService": getService}
 
 	tpl := template.Must(template.New(templateName).Funcs(funcMap).Parse(templateContent))
 
@@ -33,4 +34,3 @@ func RenderTemplate(templateName string, templateContent string, data interface{
 
 	return strBuffer.String(), nil
 }
-
