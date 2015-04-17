@@ -2,17 +2,26 @@ package marathon
 
 import (
 	"encoding/json"
-	"github.com/QubitProducts/bamboo/configuration"
 	"io/ioutil"
 	"net/http"
 	"sort"
 	"strings"
+
+	"github.com/QubitProducts/bamboo/configuration"
 )
 
 // Describes an app process running
+
+
+type Port struct {
+	id int
+	host int
+	needed
+}
+
 type Task struct {
-	Host string
-	Port int
+	Host  string
+	Ports []int
 }
 
 // An app may have multiple processes
